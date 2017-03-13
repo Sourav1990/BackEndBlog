@@ -1,14 +1,20 @@
 package com.niit.blogbackend.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
 import org.springframework.stereotype.Component;
 
-@Entity(name="User")
-@Table(name="userdetails",schema="COLB_DB")
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name="USERDETAILS",schema="COLB_DB")
 @Component
 public class User extends BaseDomain {
 	@Id
@@ -23,6 +29,16 @@ private char status;
 private String reason;
 private String role;
 private char is_online;
+@JsonIgnore
+@OneToMany(mappedBy="request_sender", fetch=FetchType.EAGER)
+private List<Friend> friends;
+
+public List<Friend> getFriends() {
+	return friends;
+}
+public void setFriends(List<Friend> friends) {
+	this.friends = friends;
+}
 public String getId() {
 	return id;
 }

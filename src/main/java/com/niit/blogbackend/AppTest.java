@@ -3,7 +3,9 @@ package com.niit.blogbackend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.niit.blogbackend.dao.BlogDAO;
 import com.niit.blogbackend.dao.UserDAO;
+import com.niit.blogbackend.model.Blog;
 import com.niit.blogbackend.model.User;
 
 public class AppTest {
@@ -16,7 +18,7 @@ public class AppTest {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.scan("com.niit.blogbackend");
 		context.refresh();
-		UserDAO userDAO=(UserDAO) context.getBean("userDAO");
+		/*UserDAO userDAO=(UserDAO) context.getBean("userDAO");
 		User user=(User) context.getBean("user");
 		
 		user.setId("sou1");
@@ -29,6 +31,6 @@ public class AppTest {
 		user.setStatus('1');
 		user.setIs_online('Y');
 		user.setAddress("Birati");
-		userDAO.save(user);
+		userDAO.save(user);*/
 	}
 }

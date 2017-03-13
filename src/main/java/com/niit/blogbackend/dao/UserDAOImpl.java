@@ -3,6 +3,7 @@ package com.niit.blogbackend.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,6 @@ public class UserDAOImpl implements UserDAO {
 		return (User) sessionFactory.getCurrentSession().get(User.class, id);
 	}
 
-	@Transactional
-	public User getByUsername(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Transactional
 	public boolean save(User user) {
@@ -56,14 +52,52 @@ public class UserDAOImpl implements UserDAO {
 
 	@Transactional
 	public boolean update(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			sessionFactory.getCurrentSession().update(user);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+
+	@Transactional
+	public User authenticate(String id, String password) {
+		
+		String hql = "from User where id = '" + id + "' and password = '" + password +"'";
+		Query query =  sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<User> list=(List<User>) query.list();
+		if(list!=null &&!list.isEmpty()){
+			return list.get(0);
+		}
+		return null;
 	}
 
 	@Transactional
-	public boolean delete(String id) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<User> notMyFriends(String userID) {
+		String hql="from User where id not in( SELECT friendID from "+"Friend where userID='"+userID+""+"' OR friendID='"+ userID+"')";
+		return sessionFactory.getCurrentSession().createQuery(hql).list();
+	}
+	/*@Transactional
+	public void setOnline(String userID) {
+	
+		String hql = " UPDATE User	SET is_online = 'Y' where userID='" + userID + "'";
+	
+		Query query = sessionFactory.openSession().createQuery(hql);
+		query.executeUpdate();
+
 	}
 
+	@Transactional
+	public void setOffLine(String userID) {
+
+		String hql = " UPDATE User	SET is_online = 'N' where userID='" + userID + "'";
+
+		Query query = sessionFactory.openSession().createQuery(hql);
+		query.executeUpdate();
+
+
+	}*/
 }
