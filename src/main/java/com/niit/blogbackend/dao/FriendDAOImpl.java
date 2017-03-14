@@ -99,7 +99,7 @@ public class FriendDAOImpl implements FriendDAO {
 
 	@Transactional
 	public List<Friend> getNewFriendRequests(String friendID) {
-		String hql = "select userID from Friend where friendID=" + "'" + friendID + "' and status ='" + "N'";
+		String hql = "from Friend where friendID=" + "'" + friendID + "' and status ='" + "N'";
 
 		log.debug(hql);
 		 return  sessionFactory.openSession().createQuery(hql).list();
@@ -140,6 +140,7 @@ public class FriendDAOImpl implements FriendDAO {
 		return (Friend) query.uniqueResult();
 
 	}
+	@Transactional
 	public boolean unFriend(String userID, String friendID){
 		// TODO Auto-generated method stub
 		try {
