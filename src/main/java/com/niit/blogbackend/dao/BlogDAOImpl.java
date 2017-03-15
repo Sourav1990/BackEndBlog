@@ -106,16 +106,25 @@ public class BlogDAOImpl implements BlogDAO{
 	}
 
 	@Transactional
-		public Blog getBlog(Integer id) {
-			//sessionFactory.getCurrentSession().get(TBlog.class, id);
-			return (Blog) getSession().get(Blog.class, id);
+	public Blog get(int id) {
+		String hql = "from Blog where id=" + id;
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+		List<Blog> list = (List<Blog>) query.list();
+
+		if (list != null && !list.isEmpty()) {
+			return list.get(0);
+		}
+		return null;
+
 	}
 
-	@Override
-	public List<Blog> getAllBlogs(String userID) {
 
-		String hql = "from TBlog where userID = '"+userID+"'";
-		Query query=	 getSession().createQuery(hql);
+	@Transactional
+	public List<Blog> getmyBlogs(String userID) {
+
+		String hql = "from Blog where userID = '"+userID+ "' and status ='" + "A'";
+		Query query=	sessionFactory. getCurrentSession().createQuery(hql);
 		return query.list();
 	}
 

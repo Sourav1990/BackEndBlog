@@ -6,11 +6,11 @@ import com.niit.blogbackend.model.Blog;
 
 public interface BlogDAO {
 
-	public Blog getBlog(Integer id);
+	public Blog get(int id);
 
 	public List<Blog> getAllBlogs();
 
-	public List<Blog> getAllBlogs(String userID);
+	public List<Blog> getmyBlogs(String userID);
 
 	public boolean update(Blog blog);
 
