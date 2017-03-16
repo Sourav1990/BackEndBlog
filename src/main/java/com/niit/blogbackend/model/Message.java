@@ -9,7 +9,7 @@ public class Message {
 	    
 	  }
 	  
-	  public Message(int id, String message) {
+	  public Message(int id, String message,String name ) {
 	    this.id = id;
 	    this.message = message;
 	    this.name=name;
