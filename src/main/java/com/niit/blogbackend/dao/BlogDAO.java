@@ -9,6 +9,8 @@ public interface BlogDAO {
 	public Blog get(int id);
 
 	public List<Blog> getAllBlogs();
+	
+	public List<Blog> getAllNewBlogs();
 
 	public List<Blog> getmyBlogs(String userID);
 

@@ -40,6 +40,15 @@ public class JobDAOImpl implements JobDAO{
 		return query.list();
 		//return null;
 	}
+	
+	@Transactional
+	public List<JobApplication> getAllNewAppliedJobs() {
+		log.debug("Starting of method getAllAppliedJobs");
+		String hql = "from JobApplication where status ='"+"N'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		return query.list();
+		//return null;
+	}
 
 	@Transactional
 	public Job getJobDetails(Long id) {

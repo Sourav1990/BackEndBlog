@@ -58,6 +58,19 @@ public class BlogDAOImpl implements BlogDAO{
 	}
 
 	@Transactional
+	public List<Blog> getAllNewBlogs() {
+		log.debug("->->Starting of the method list");
+		String hql = "from Blog where status = 'N'";
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+
+		@SuppressWarnings("unchecked")
+		List<Blog> getAllBlogs = (List<Blog>) query.list();
+
+		return getAllBlogs;
+	}
+
+	@Transactional
 	public boolean update(Blog blog) {
 		log.debug("->->Starting of the method update");
 		try {

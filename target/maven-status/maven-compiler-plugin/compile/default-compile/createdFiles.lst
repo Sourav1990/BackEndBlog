@@ -1,4 +1,5 @@
 com\niit\blogbackend\model\Message.class
+com\niit\blogbackend\model\PrivateMessage.class
 com\niit\blogbackend\config\ApplicationContextConfig.class
 com\niit\blogbackend\dao\JobDAOImpl.class
 com\niit\blogbackend\model\Job.class
